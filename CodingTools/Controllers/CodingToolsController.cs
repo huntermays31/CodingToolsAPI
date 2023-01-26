@@ -1,4 +1,6 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Services.CQRSRequests.Commands;
 
 namespace CodingTools.Controllers
 {
@@ -7,10 +9,18 @@ namespace CodingTools.Controllers
     public class CodingToolsController : ControllerBase
     {
 
-        [HttpGet(Name = "CodingTools")]
-        public async Task<ActionResult<string>> Get()
+        private readonly IMediator _mediator;
+
+        public CodingToolsController(IMediator mediator)
         {
-            return Ok(true);
+            _mediator = mediator;
+        }
+
+        [HttpPost(Name = "CodingTools")]
+        public async Task<ActionResult<string>> Get([FromBody] string message)
+        {
+            var result = await _mediator.Send(new SendMessageCommand(message));
+            return Ok(result);
         }
     }
 }
