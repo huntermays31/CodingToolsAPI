@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Models.Dtos;
 using Services.CQRSRequests.Commands;
 
 namespace CodingTools.Controllers
@@ -17,9 +18,9 @@ namespace CodingTools.Controllers
         }
 
         [HttpPost(Name = "CodingTools")]
-        public async Task<ActionResult<string>> Get([FromBody] string message)
+        public async Task<ActionResult<string>> Get([FromBody] SendMessageDto message)
         {
-            var result = await _mediator.Send(new SendMessageCommand(message));
+            var result = await _mediator.Send(new SendMessageCommand(message.Message));
             return Ok(result);
         }
     }
