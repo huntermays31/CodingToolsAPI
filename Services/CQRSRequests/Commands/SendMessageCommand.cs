@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Services.CQRSRequests.Commands
 {
-    public class SendMessageCommand : IRequest<bool>
+    public class SendMessageCommand : IRequest<string>
     {
         public string Message { get; set; }
 

@@ -8,11 +8,11 @@ using Services.CQRSRequests.Commands;
 
 namespace Services.Handlers.Commands
 {
-    public class SendMessageHandler : IRequestHandler<SendMessageCommand, bool>
+    public class SendMessageHandler : IRequestHandler<SendMessageCommand, string>
     {
-        public async Task<bool> Handle(SendMessageCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(SendMessageCommand request, CancellationToken cancellationToken)
         {
-            return false;
+            return request.Message;
         }
     }
 }
